@@ -27,7 +27,7 @@ app
                 res.send('Error encountered: \n' + JSON.stringify(JSONresponse)).status(200).end();
             } else {
                 console.log(JSONresponse);
-                res.send('Success!', JSONresponse.access_token);
+                res.send(`Success! ${JSONresponse.access_token}`);
             }
         });
     })
