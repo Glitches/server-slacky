@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000
 
 app
     .get('/auth', (req, res) => {
-        res.sendFile(__dirname + '/add_to_slack.html');
+        res.sendFile(__dirname + '/static/add_to_slack.html');
     })
     .get('/auth/redirect', (req, res) => {
         var options = {
