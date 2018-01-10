@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 5000
 
 app
     .get('/auth', (req, res) => {
+        console.log('im here')
         res.sendFile(__dirname + '/static/add_to_slack.html');
     })
     .get('/auth/redirect', (req, res) => {
@@ -19,7 +20,8 @@ app
             method: 'GET'
         };
         request(options, (error, response, body) => {
-            var JSONresponse = JSON.parse(body);
+            console.log('cuai');
+            const JSONresponse = JSON.parse(body);
             if (!JSONresponse.ok) {
                 console.log(JSONresponse);
                 res.send("Error encountered: \n" + JSON.stringify(JSONresponse)).status(200).end();
