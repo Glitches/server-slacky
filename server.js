@@ -3,11 +3,12 @@ require('dotenv').config();
 const express = require('express');
 const request = require('request');
 const app = express();
+const https = require('https');
+
 const PORT = process.env.PORT || 5000
 
 app
     .get('/auth', (req, res) => {
-        console.log('im here')
         res.sendFile(__dirname + '/static/add_to_slack.html');
     })
     .get('/auth/redirect', (req, res) => {
@@ -20,14 +21,13 @@ app
             method: 'GET'
         };
         request(options, (error, response, body) => {
-            console.log('cuai');
             const JSONresponse = JSON.parse(body);
             if (!JSONresponse.ok) {
                 console.log(JSONresponse);
-                res.send("Error encountered: \n" + JSON.stringify(JSONresponse)).status(200).end();
+                res.send('Error encountered: \n' + JSON.stringify(JSONresponse)).status(200).end();
             } else {
-                console.log(body, JSONresponse);
-                res.send("Success!");
+                console.log(JSONresponse);
+                res.send('Success!', JSONresponse.access_token);
             }
         });
     })
