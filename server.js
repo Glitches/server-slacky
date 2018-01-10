@@ -24,7 +24,7 @@ app
                 console.log(JSONresponse);
                 res.send("Error encountered: \n" + JSON.stringify(JSONresponse)).status(200).end();
             } else {
-                console.log(JSONresponse);
+                console.log(body, JSONresponse);
                 res.send("Success!");
             }
         });
