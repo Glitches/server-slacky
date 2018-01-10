@@ -11,7 +11,6 @@ app
         res.sendFile(__dirname + '/static/add_to_slack.html');
     })
     .get('/auth/redirect', (req, res) => {
-      console.log('hiiii');
         var options = {
             uri: 'https://slack.com/api/oauth.access?code='
       + req.query.code +
