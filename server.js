@@ -9,10 +9,10 @@ const PORT = process.env.PORT || 5000
 
 app
     .get('/auth', (req, res) => {
+        console.log(req.originalUrl);
         res.sendFile(__dirname + '/static/add_to_slack.html');
     })
     .get('/auth/redirect', (req, res) => {
-        console.log(req.originalUrl);
         var options = {
             uri: 'https://slack.com/api/oauth.access?code='
       + req.query.code +
