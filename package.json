@@ -8,6 +8,7 @@
     "express": "^4.16.2",
     "metascraper": "^3.4.3",
     "qs": "^6.5.1",
+    "raven": "^2.4.1",
     "request": "^2.83.0"
   },
   "devDependencies": {
