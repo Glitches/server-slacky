@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const request = require("request");
 const app = express();
+const Raven = require("raven");
 const https = require("https");
 const qs = require("qs");
 const cors = require("cors");
@@ -9,8 +10,11 @@ const metascraper = require("metascraper");
 const got = require("got");
 
 const PORT = process.env.PORT || 5000;
+// Must configure Raven before doing anything else with it
+Raven.config(process.env.__DSN__).install();
 
 app
+  .use(Raven.requestHandler())
   .use(cors())
   .get("/auth", (req, res) => {
     console.log(req.originalUrl);
@@ -84,5 +88,11 @@ app
     } catch (e) {
       console.log("/preview ", e);
     }
+  })
+  .use(function onError(err, req, res, next) {
+    // The error id is attached to `res.sentry` to be returned
+    // and optionally displayed to the user for support.
+    res.statusCode = 500;
+    res.end(res.sentry + "\n");
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
